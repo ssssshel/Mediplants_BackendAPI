@@ -6,13 +6,13 @@ const port = 3000
 
 // middlewares
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 
-require('dotenv').config
+require('dotenv').config();
 
 // routes
 app.use(routes)
 
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server running at ${port} port`)
 })
