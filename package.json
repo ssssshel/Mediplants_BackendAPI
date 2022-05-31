@@ -1,0 +1,21 @@
+{
+  "name": "mediplants_backend_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index",
+    "dev": "nodemon src/index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "16.0.1",
+    "express": "4.18.1",
+    "pg": "8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.16"
+  }
+}
