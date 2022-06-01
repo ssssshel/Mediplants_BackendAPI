@@ -1,7 +1,10 @@
 const { Router } = require('express')
+// const { getIndex } = require('../controllers/index.controller')
 const { getUsers, postUsers, getUserById, deleteUserById, putUserById } = require('../controllers/users.controller')
 const { getProducts, getProductById, getProductsByCategory, postProducts } = require('../controllers/products.controller')
 const router = Router()
+
+// router.get('/', getIndex)
 
 // USERS ROUTES
 router.get('/users', getUsers)
