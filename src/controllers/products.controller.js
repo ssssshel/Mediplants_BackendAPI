@@ -1,4 +1,8 @@
-const pool = require("../db/dbCredentials")
+// const pool = require("../db/dbCredentials")
+
+// devPool
+const pool = require("../db/devDbCredentials")
+
 
 const getProducts = async (req, res) => {
   try {
@@ -50,6 +54,35 @@ const postProducts = async (req, res) => {
   }
 }
 
+const deleteProductById = async(req, res) => {
+  const {id} = req.params
+  try {
+    const response = await pool.query('DELETE FROM products WHERE id = $1', [id])
+    if(response.rowCount == 0){
+      res.status(404).json({success: false, message: `Product ${id} cannot be deleted because doesn't exists`})
+    }else{
+      res.status(200).json({success: true, message: `Product ${id} has been deleted`})
+    }
+  } catch (error) {
+    res.status(400).json({error})
+  }
+}
+
+const putProductById= async(req, res) => {
+  const {id} = req.params
+  const {name, scname, category, img, price, information, stock} = req.body
+  try {
+    const response = await pool.query('UPDATE products SET name = $1, scname = $2, category = $3, img = $4, price = $5, information = $6, stock = $7 WHERE id = $8', [name, scname, category, img, price, information, stock, id])
+    if(response.rowCount == 0){
+      res.status(404).json({ success: false, message: `Product ${id} cannot be updated because doesn't exist` })
+    }else{
+      res.status(200).json({ success: true, message: `User  ${id} was updated successfully` })
+    }
+  } catch (error) {
+    res.status(400).json({ error })
+  }
+}
+
 module.exports = {
-  getProducts, getProductById, getProductsByCategory, postProducts
+  getProducts, getProductById, getProductsByCategory, postProducts, deleteProductById, putProductById
 }

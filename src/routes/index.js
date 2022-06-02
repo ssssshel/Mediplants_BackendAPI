@@ -1,7 +1,7 @@
 const { Router } = require('express')
 // const { getIndex } = require('../controllers/index.controller')
 const { getUsers, postUsers, getUserById, deleteUserById, putUserById } = require('../controllers/users.controller')
-const { getProducts, getProductById, getProductsByCategory, postProducts } = require('../controllers/products.controller')
+const { getProducts, getProductById, getProductsByCategory, postProducts, deleteProductById,putProductById } = require('../controllers/products.controller')
 const router = Router()
 
 // router.get('/', getIndex)
@@ -15,9 +15,11 @@ router.put('/users/:id', putUserById)
 
 // PRODUCTS ROUTES
 router.get('/products', getProducts)
-router.get('/product/:id', getProductById)
-router.get('/products/:category', getProductsByCategory)
+router.get('/products/id/:id', getProductById)
+router.get('/products/category/:category', getProductsByCategory)
 router.post('/products', postProducts)
+router.delete('/products/id/:id', deleteProductById)
+router.put('/products/id/:id', putProductById)
 
 
 module.exports = router

@@ -1,4 +1,7 @@
-const pool = require('../db/dbCredentials')
+// const pool = require('../db/dbCredentials')
+
+// devPool
+const pool = require("../db/devDbCredentials")
 
 const getUsers = async (req, res) => {
     try {
