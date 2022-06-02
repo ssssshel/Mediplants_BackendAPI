@@ -1,7 +1,7 @@
-// const pool = require("../db/dbCredentials")
+const pool = require("../db/dbCredentials")
 
 // devPool
-const pool = require("../db/devDbCredentials")
+// const pool = require("../db/devDbCredentials")
 
 
 const getProducts = async (req, res) => {
