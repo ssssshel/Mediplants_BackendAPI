@@ -29,9 +29,9 @@ const getUserById = async (req, res) => {
 }
 
 const postUsers = async (req, res) => {
-    const { name, email } = req.body
+    const { name, surname, email, password } = req.body
     try {
-        const response = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email])
+        const response = await pool.query('INSERT INTO users (name, surname, email, password) VALUES ($1, $2, $3, $4)', [name, surname, email, password])
         res.status(201).json({ success: true, message: 'User created', data: response })
     } catch (error) {
         res.status(400).json({ error })
