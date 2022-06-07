@@ -9,8 +9,8 @@ const getProducts = async (req, res) => {
     const response = await pool.query('SELECT * FROM products')
     const data = response.rows
     res.status(200).json({ success: true, message: "Products found", data })
-  } catch (error) {
-    res.status(404).json({ error })
+  } catch (e) {
+    res.status(400).json({message: "Busqueda inválida", error: true })
   }
 }
 
@@ -22,10 +22,10 @@ const getProductById = async (req, res) => {
     if (response.rowCount == 0) {
       res.status(404).json({ success: false, message: `Product ${id} does not exist` })
     } else {
-      res.status(200).json({ success: true, message: `Product ${id} found`, data })
+      res.status(200).json({ success: true, message: `Product ${id} found`})
     }
-  } catch (error) {
-    res.status(400).json({ error })
+  } catch (e) {
+    res.status(400).json({message: "Busqueda inválidaa", error: true })
   }
 }
 
@@ -37,10 +37,10 @@ const getProductsByCategory = async (req, res) => {
     if (response.rowCount == 0) {
       res.status(404).json({ success: false, message: `Products of ${category} category does not exist` })
     } else {
-      res.status(200).json({ success: true, message: `Products of ${category} successfully found`, data })
+      res.status(200).json({ success: true, message: `Products of ${category} successfully found`})
     }
-  } catch (error) {
-    res.status(400).json({ error })
+  } catch (e) {
+    res.status(400).json({message: "Busqueda inválida", error: true })
   }
 }
 
@@ -48,9 +48,9 @@ const postProducts = async (req, res) => {
   const { name, scname, category, img, price, information, stock } = req.body
   try {
     const response = await pool.query('INSERT INTO products (name, scname, category, img, price, information, stock) VALUES ($1, $2, $3, $4, $5, $6, $7)', [name, scname, category, img, price, information, stock])
-    res.status(201).json({ success: true, message: 'Product created', data: response })
-  } catch (error) {
-    res.status(400).json({ error })
+    res.status(201).json({ success: true, message: 'Product created'})
+  } catch (e) {
+    res.status(400).json({message: "Error al intentar crear producto" ,error: true })
   }
 }
 
@@ -63,8 +63,8 @@ const deleteProductById = async(req, res) => {
     }else{
       res.status(200).json({success: true, message: `Product ${id} has been deleted`})
     }
-  } catch (error) {
-    res.status(400).json({error})
+  } catch (e) {
+    res.status(400).json({message: "Error al intentar eliminar producto", error: true})
   }
 }
 
@@ -78,8 +78,8 @@ const putProductById= async(req, res) => {
     }else{
       res.status(200).json({ success: true, message: `User  ${id} was updated successfully` })
     }
-  } catch (error) {
-    res.status(400).json({ error })
+  } catch (e) {
+    res.status(400).json({message: "Error al intentar actualizar ", error: true })
   }
 }
 

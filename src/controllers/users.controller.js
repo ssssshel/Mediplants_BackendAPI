@@ -7,7 +7,7 @@ const getUsers = async (req, res) => {
     try {
         const response = await pool.query('SELECT * FROM users');
         const data = response.rows
-        res.status(200).json({ success: true, message: "Users found", data })
+        res.status(200).json({ success: true, message: "Users found"})
     } catch (e) {
         res.status(400).json({message: "Busqueda inválida", error: true })
     }
@@ -22,7 +22,7 @@ const getUserById = async (req, res) => {
         if (response.rowCount == 0) {
             res.status(404).json({ success: false, message: `User ${id} does not exist` })
         } else {
-            res.status(200).json({ success: true, message: `User ${id} found`, data })
+            res.status(200).json({ success: true, message: `User ${id} found`})
         }
     } catch (e) {
         res.status(400).json({message: "Busqueda inválida", error: true} )
@@ -34,7 +34,7 @@ const postUsers = async (req, res) => {
     const { name, surname, email, password } = req.body
     try {
         const response = await pool.query('INSERT INTO users (name, surname, email, password) VALUES ($1, $2, $3, $4)', [name, surname, email, password])
-        res.status(201).json({ success: true, message: 'User created', data: response })
+        res.status(201).json({ success: true, message: 'User created' })
     } catch (e) {
         res.status(400).json({message: "Ha ocurrido un error al intentar el registro", error: true })
     }
@@ -47,7 +47,7 @@ const deleteUserById = async (req, res) => {
         if (response.rowCount == 0) {
             res.status(404).json({ success: false, message: `User ${id} cannot be deleted because doesn't exist` })
         } else {
-            res.status(200).json({ success: true, message: `User ${id} deleted`, data: response })
+            res.status(200).json({ success: true, message: `User ${id} deleted`})
         }
     } catch (e) {
         res.status(400).json({message: "Ha ocurrido un error", error: true })
