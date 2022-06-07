@@ -8,7 +8,7 @@ const getProducts = async (req, res) => {
   try {
     const response = await pool.query('SELECT * FROM products')
     const data = response.rows
-    res.status(200).json({ success: true, message: "Products found", data })
+    res.status(200).json({ success: true, message: "Products found", products: data })
   } catch (e) {
     res.status(400).json({message: "Busqueda inválida", error: true })
   }
@@ -22,7 +22,7 @@ const getProductById = async (req, res) => {
     if (response.rowCount == 0) {
       res.status(404).json({ success: false, message: `Product ${id} does not exist` })
     } else {
-      res.status(200).json({ success: true, message: `Product ${id} found`})
+      res.status(200).json({ success: true, message: `Product ${id} found`, product: data})
     }
   } catch (e) {
     res.status(400).json({message: "Busqueda inválidaa", error: true })
@@ -37,7 +37,7 @@ const getProductsByCategory = async (req, res) => {
     if (response.rowCount == 0) {
       res.status(404).json({ success: false, message: `Products of ${category} category does not exist` })
     } else {
-      res.status(200).json({ success: true, message: `Products of ${category} successfully found`})
+      res.status(200).json({ success: true, message: `Products of ${category} successfully found`, products: data})
     }
   } catch (e) {
     res.status(400).json({message: "Busqueda inválida", error: true })
