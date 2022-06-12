@@ -7,35 +7,35 @@ const getUsers = async (req, res) => {
     try {
         const response = await pool.query('SELECT * FROM users');
         const data = response.rows
-        res.status(200).json({ success: true, message: "Users found", users: data})
+        res.status(200).json({ success: true, message: "Users found", users: data })
     } catch (e) {
-        res.status(400).json({message: "Busqueda inválida", error: true })
+        res.status(400).json({ message: "Busqueda inválida", error: true })
     }
 }
 
 const getUserById = async (req, res) => {
     const id = req.params.id
-    
+
     try {
         const response = await pool.query('SELECT * FROM users WHERE id = $1', [id])
         const data = response.rows
         if (response.rowCount == 0) {
             res.status(404).json({ success: false, message: `User ${id} does not exist` })
         } else {
-            res.status(200).json({ success: true, message: `User ${id} found`, user: data})
+            res.status(200).json({ success: true, message: `User ${id} found`, user: data })
         }
     } catch (e) {
-        res.status(400).json({message: "Busqueda inválida", error: true} )
+        res.status(400).json({ message: "Busqueda inválida", error: true })
     }
 }
 
 const postUsers = async (req, res) => {
-    const { name, surname, email, password } = req.body
+    const { name, surname, email, role, orders } = req.body
     try {
-        const response = await pool.query('INSERT INTO users (name, surname, email, password) VALUES ($1, $2, $3, $4)', [name, surname, email, password])
+        const response = await pool.query('INSERT INTO users (name, surname, email, role, orders) VALUES ($1, $2, $3, $4, $5)', [name, surname, email, role, orders])
         res.status(201).json({ success: true, message: 'User created' })
     } catch (e) {
-        res.status(400).json({message: "Ha ocurrido un error al intentar el registro", error: true })
+        res.status(400).json({ message: "Ha ocurrido un error al intentar el registro", error: true })
     }
 }
 
@@ -46,10 +46,10 @@ const deleteUserById = async (req, res) => {
         if (response.rowCount == 0) {
             res.status(404).json({ success: false, message: `User ${id} cannot be deleted because doesn't exist` })
         } else {
-            res.status(200).json({ success: true, message: `User ${id} deleted`})
+            res.status(200).json({ success: true, message: `User ${id} deleted` })
         }
     } catch (e) {
-        res.status(400).json({message: "Ha ocurrido un error", error: true })
+        res.status(400).json({ message: "Ha ocurrido un error", error: true })
     }
 }
 
@@ -64,7 +64,7 @@ const putUserById = async (req, res) => {
             res.status(200).json({ success: true, message: `User  ${id} was updated with name: ${name} and email: ${email}` })
         }
     } catch (e) {
-        res.status(400).json({message: "Ha  ocurrido un error", error: true })
+        res.status(400).json({ message: "Ha  ocurrido un error", error: true })
     }
 }
 
