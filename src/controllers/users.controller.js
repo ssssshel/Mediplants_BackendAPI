@@ -7,7 +7,7 @@ const getUsers = async (req, res) => {
     try {
         const response = await pool.query('SELECT * FROM users');
         const data = response.rows
-        res.status(200).json({ success: true, message: "Users found", users: data })
+        res.status(200).json({ success: true, message: "Users found", data: data })
     } catch (e) {
         res.status(400).json({ message: "Busqueda inválida", error: true })
     }
@@ -22,7 +22,7 @@ const getUserById = async (req, res) => {
         if (response.rowCount == 0) {
             res.status(404).json({ success: false, message: `User ${id} does not exist` })
         } else {
-            res.status(200).json({ success: true, message: `User ${id} found`, user: data })
+            res.status(200).json({ success: true, message: `User ${id} found`, data: data })
         }
     } catch (e) {
         res.status(400).json({ message: "Busqueda inválida", error: true })
