@@ -30,9 +30,10 @@ const getUserById = async (req, res) => {
 }
 
 const postUsers = async (req, res) => {
-    const { name, surname, email, role, orders } = req.body
+    const { name, surname, email, role, cellphone, fireid } = req.body
+    const orders = [""]
     try {
-        const response = await pool.query('INSERT INTO users (name, surname, email, role, orders) VALUES ($1, $2, $3, $4, $5)', [name, surname, email, role, orders])
+        const response = await pool.query('INSERT INTO users (name, surname, email, role, orders, cellphone, fireid) VALUES ($1, $2, $3, $4, $5, $6, $7)', [name, surname, email, role, orders, cellphone, fireid])
         res.status(201).json({ success: true, message: 'User created' })
     } catch (e) {
         res.status(400).json({ message: "Ha ocurrido un error al intentar el registro", error: true })
