@@ -1,14 +1,14 @@
-const pool = require("../db/dbCredentials")
+// const pool = require("../db/dbCredentials")
 
 // devPool
-// const pool = require("../db/devDbCredentials")
+const pool = require("../db/devDbCredentials")
 
 
 const getProducts = async (req, res) => {
   try {
     const response = await pool.query('SELECT * FROM products')
     const data = response.rows
-    res.status(200).json({ success: true, message: "Products found", data: data })
+    res.status(200).json(data)
   } catch (e) {
     res.status(400).json({ message: "Busqueda inválida", error: true })
   }
