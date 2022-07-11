@@ -23,7 +23,6 @@ router.delete('/products/id/:id', deleteProductById)
 router.put('/products/id/:id', putProductById)
 
 // ORDERS ROUTES
-router.get()
 router.post('/orders', postOrders)
 
 module.exports = router
