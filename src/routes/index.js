@@ -24,6 +24,6 @@ router.put('/products/id/:id', putProductById)
 
 // ORDERS ROUTES
 router.get()
-router.post('orders', postOrders)
+router.post('/orders', postOrders)
 
 module.exports = router
